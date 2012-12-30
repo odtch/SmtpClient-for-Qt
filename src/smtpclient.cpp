@@ -240,7 +240,7 @@ bool SmtpClient::connectToHost()
 
 			if (!((QSslSocket*) socket)->waitForEncrypted(connectionTimeout)) {
 				qDebug() << ((QSslSocket*) socket)->errorString();
-				emit SmtpError(ConnectionTimeoutError);
+				emit smtpError(ConnectionTimeoutError);
 				return false;
 			}
 
@@ -444,10 +444,12 @@ void SmtpClient::sendMessage(const QString &text)
 
 void SmtpClient::socketStateChanged(QAbstractSocket::SocketState state)
 {
+	Q_UNUSED( state );
 }
 
 void SmtpClient::socketError(QAbstractSocket::SocketError socketError)
 {
+	Q_UNUSED( socketError );
 }
 
 void SmtpClient::socketReadyRead()
